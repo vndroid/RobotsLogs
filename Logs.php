@@ -1,13 +1,13 @@
 <?php
 /**
-     * 蜘蛛来访日志
-     * 
-     * @package RobotsLogs
-     * @author  Cain
-     * @version 2.0.2
-     * @update: 2018.12.24
-     * @link http://wavengine.com
-     */
+ * 蜘蛛来访日志插件，记录蜘蛛爬行的时间及来源地址
+ * 
+ * @package RobotsLogs
+ * @author  Cain
+ * @version 2.0.2
+ * @update: 2018.12.24
+ * @link http://wavengine.com
+ */
 include 'common.php';
 include 'header.php';
 include 'menu.php';

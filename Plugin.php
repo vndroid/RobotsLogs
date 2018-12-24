@@ -1,25 +1,25 @@
 <?php
 /**
- * 蜘蛛来访日志插件，记录蜘蛛爬行的时间及其网址
+ * 蜘蛛来访日志插件，记录蜘蛛爬行的时间及来源地址
  * 
- * @package RobotsPlus
- * @author  YoviSun
- * @version 2.0.1
- * @update: 2018.10.06
- * @link http://doufu.ru
+ * @package RobotsLogs
+ * @author  Cain
+ * @version 2.0.2
+ * @update: 2018.12.24
+ * @link http://wavengine.com
  */
-class RobotsPlus_Plugin implements Typecho_Plugin_Interface
+class RobotsLogs_Plugin implements Typecho_Plugin_Interface
 {
     public static function activate()
     {
-        $meg = RobotsPlus_Plugin::install();
-        Helper::addPanel(1, 'RobotsPlus/Logs.php', '蜘蛛日志', '查看蜘蛛日志', 'administrator');
-        Typecho_Plugin::factory('Widget_Archive')->header = array('RobotsPlus_Plugin', 'isbot');
-        return _t($meg.'。请进行<a href="options-plugin.php?config=RobotsPlus">初始化设置</a>');
+        $meg = RobotsLogs_Plugin::install();
+        Helper::addPanel(1, 'RobotsLogs/Logs.php', '蜘蛛日志', '查看蜘蛛日志', 'administrator');
+        Typecho_Plugin::factory('Widget_Archive')->header = array('RobotsLogs_Plugin', 'isbot');
+        return _t($meg.'。请进行<a href="options-plugin.php?config=RobotsLogs">初始化设置</a>');
     }
     public static function deactivate()
     {
-        $config  = Typecho_Widget::widget('Widget_Options')->plugin('RobotsPlus');
+        $config  = Typecho_Widget::widget('Widget_Options')->plugin('RobotsLogs');
         $isdrop = $config->droptable;
         if ($isdrop == 0)
         {
@@ -27,7 +27,7 @@ class RobotsPlus_Plugin implements Typecho_Plugin_Interface
             $prefix = $db->getPrefix();
             $db->query("DROP TABLE `".$prefix."robots_logs`", Typecho_Db::WRITE);
         }
-        Helper::removePanel(1, 'RobotsPlus/Logs.php');
+        Helper::removePanel(1, 'RobotsLogs/Logs.php');
         if ($isdrop != 0)
         {
             return "插件已被禁用，数据表未被清除";
@@ -47,18 +47,18 @@ class RobotsPlus_Plugin implements Typecho_Plugin_Interface
             );
         $botlist = new Typecho_Widget_Helper_Form_Element_Checkbox(
             'botlist', $options, '',
-              '蜘蛛记录设置:', '请选择要记录的蜘蛛日志');
+              '蜘蛛记录类型', '请选择要记录的蜘蛛种类');
             
         $pagecount = new Typecho_Widget_Helper_Form_Element_Text(
           'pagecount', NULL, '',
-          '分页数量', '每页显示的日志数量');
+          '分页数量', '每页显示的蜘蛛日志数量');
         $dbool = array (
             '0' => '删除',
             '1' => '不删除'
             );
         $droptable = new Typecho_Widget_Helper_Form_Element_Radio(
             'droptable', $dbool, '',
-              '删除数据表:', '请选择是否在禁用插件时，删除日志数据表');
+              '清理选项', '请选择是否在禁用插件时，同时删除插件相关的数据库表');
         $form->addInput($botlist);
         $form->addInput($pagecount);
         $form->addInput($droptable);
@@ -105,7 +105,7 @@ class RobotsPlus_Plugin implements Typecho_Plugin_Interface
     }
     public static function isbot($rule = NULL)
     {
-        $config  = Typecho_Widget::widget('Widget_Options')->plugin('RobotsPlus');
+        $config  = Typecho_Widget::widget('Widget_Options')->plugin('RobotsLogs');
         $bot = NULL;
         $botlist = $config->botlist;
         if (sizeof($botlist)>0) {
