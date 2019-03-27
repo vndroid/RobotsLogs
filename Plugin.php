@@ -4,9 +4,9 @@
  * 
  * @package RobotsLogs
  * @author  Cain
- * @version 2.0.2
- * @update: 2018.12.24
- * @link http://wavengine.com
+ * @version 2.0.3
+ * @update: 2019.03.28
+ * @link http://vvave.net
  */
 class RobotsLogs_Plugin implements Typecho_Plugin_Interface
 {
@@ -37,13 +37,14 @@ class RobotsLogs_Plugin implements Typecho_Plugin_Interface
     {
         $options = array (
             'baidu' => '百度',
-            'google' => '谷歌',
+            'google' => 'Google',
             'sogou' => '搜狗',
             'youdao' => '有道',
-            'soso' => '搜搜',
+            'soso' => 'SOSO',
             'bing' => '必应',
-            'yahoo' => '雅虎',
-            '360' => '360搜索'
+            'yahoo' => 'Yahoo',
+            '360' => '360搜索',
+            'duckduckgo' => 'DuckDuckGo'
             );
         $botlist = new Typecho_Widget_Helper_Form_Element_Checkbox(
             'botlist', $options, '',

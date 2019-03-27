@@ -4,9 +4,9 @@
  * 
  * @package RobotsLogs
  * @author  Cain
- * @version 2.0.2
- * @update: 2018.12.24
- * @link http://wavengine.com
+ * @version 2.0.3
+ * @update: 2019.03.28
+ * @link http://vvave.net
  */
 include 'common.php';
 include 'header.php';
@@ -130,10 +130,10 @@ include 'menu.php';
                                             return '百度';
                                             break;
                                         case "google":
-                                            return '谷歌';
+                                            return 'Google';
                                             break;
                                         case "yahoo":
-                                            return '雅虎';
+                                            return 'Yahoo';
                                             break;
                                         case "sogou":
                                             return '搜狗';
@@ -142,13 +142,16 @@ include 'menu.php';
                                             return '有道';
                                             break;
                                         case "soso":
-                                            return '搜搜';
+                                            return 'SOSO';
                                             break;
                                         case "bing":
                                             return '必应';
                                             break;
                                         case "360":
                                             return '360搜索';
+                                            break;
+                                        case "duckduckgo":
+                                            return 'DuckDuckGo';
                                             break;
                                     }
                                 }
